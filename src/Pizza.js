@@ -30,14 +30,12 @@ const Pizza = () => {
   let history = useHistory();
 
   const confirm = () => {
-    // history.push("/confirmation");
+    history.push("/confirmation");
   };
 
   const postNewOrder = (newOrder) => {
     axios.post("https://reqres.in/api/users", newOrder).then((result) => {
       setFormValues(initFormValues);
-      alert("success!");
-      console.log(result);
       confirm();
     });
   };
