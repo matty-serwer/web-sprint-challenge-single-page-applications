@@ -40,4 +40,25 @@
 .form {
   display: flex;
   flex-direction: column;
+  width: 70%;
+  margin: auto;
+}
+
+.option-header {
+  background-color:gray;
+  color: white;
+  margin: 1rem 0;
+}
+
+.submit {
+  width: 5rem;
+  margin: 1rem auto;
+  background-color:green;
+  color: black;
+  padding: 7px;
+  border: 2px solid gray;
+}
+
+.submit:disabled {
+  background-color: gray;
 }
