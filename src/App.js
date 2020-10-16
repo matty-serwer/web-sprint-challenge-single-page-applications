@@ -1,6 +1,6 @@
 import React from "react";
-import axios from 'axios';
-import { Route, Switch } from 'react-router-dom'
+
+import { Route, Switch, Link } from 'react-router-dom'
 
 import Home from './Home'
 import Pizza from './Pizza'
@@ -10,8 +10,8 @@ const App = () => {
     <div className='App'>
       <nav>
       <h1>Lambda Eats</h1>
-      <button className='nav-button'>Home</button>
-      <button className='nav-button'>Help</button>
+      <Link to='/'><button className='nav-button'>Home</button></Link>
+      <Link to='/help'><button className='nav-button'>Help</button></Link>
       </nav>
       <div className='page-container'>
           <Route path='/pizza'>

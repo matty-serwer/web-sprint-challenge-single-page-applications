@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import * as yup from "yup";
 import schema from "./formSchema";
 import "./App.css";
@@ -24,10 +25,19 @@ const Pizza = () => {
   const [disabled, setDisabled] = useState(true);
   const [formErrors, setFormErrors] = useState(initFormErrors)
 
+  const postNewOrder = (newOrder) => {
+      axios
+        .post('https://reqres.in/api/users', newOrder)
+        .then(result => {
+            setFormValues(initFormValues)
+            alert('success!');
+            console.log(result);
+        })
+  }
+
   const onChange = (evt) => {
     const { name, value, type, checked } = evt.target;
     const valueToUse = type === "checkbox" ? checked : value;
-
     yup
         .reach(schema, name)
         .validate(value)
@@ -60,7 +70,7 @@ const Pizza = () => {
       glutenFree: formValues.glutenFree,
       special: formValues.special,
     };
-    console.log(newOrder);
+    postNewOrder(newOrder);
   };
 
   useEffect(() => {
