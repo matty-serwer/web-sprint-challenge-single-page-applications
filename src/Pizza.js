@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import * as yup from "yup";
+import schema from "./formSchema";
 import "./App.css";
 
 const initFormValues = {
@@ -12,13 +14,33 @@ const initFormValues = {
   special: "",
 };
 
+const initFormErrors = {
+    size: "",
+    sauce: "",
+}
+
 const Pizza = () => {
   const [formValues, setFormValues] = useState(initFormValues);
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
+  const [formErrors, setFormErrors] = useState(initFormErrors)
 
   const onChange = (evt) => {
     const { name, value, type, checked } = evt.target;
     const valueToUse = type === "checkbox" ? checked : value;
+
+    yup
+        .reach(schema, name)
+        .validate(value)
+        .then(() => {
+            setFormErrors({
+                ...formErrors, [name]: "",
+            })
+        })
+        .catch((err) => {
+            setFormErrors({
+                ...formErrors, [name]: err.errors[0]
+            })
+        })
     setFormValues({
       ...formValues,
       [name]: valueToUse,
@@ -30,18 +52,22 @@ const Pizza = () => {
     const newOrder = {
       size: formValues.size,
       sauce: formValues.sauce,
-    //   toppings: ["pepperoni", "sausage", "mushrooms", "olives"].filter(
-    //     (topping) => {
-    //       formValues[topping];
-    //     }
-    //   ),
+      //   toppings: ["pepperoni", "sausage", "mushrooms", "olives"].filter(
+      //     (topping) => {
+      //       formValues[topping];
+      //     }
+      //   ),
       glutenFree: formValues.glutenFree,
       special: formValues.special,
     };
-    console.log(newOrder)
+    console.log(newOrder);
   };
 
-
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
 
   return (
     <div>
@@ -142,7 +168,9 @@ const Pizza = () => {
             placeholder='Anything else you would like to add?'
           />
         </label>
-        <button className='submit' disabled={disabled}>Submit</button>
+        <button className='submit' disabled={disabled}>
+          Submit
+        </button>
       </form>
     </div>
   );
