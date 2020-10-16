@@ -12,7 +12,7 @@ const App = () => {
     <div className='App'>
       <nav>
       <h1>Lambda Eats</h1>
-      <Link to='/'><button className='nav-button'>Home</button></Link>
+      <Link to='/'><button className='nav-button' id='home-button'>Home</button></Link>
       <Link to='/help'><button className='nav-button'>Help</button></Link>
       </nav>
       <div className='page-container'>

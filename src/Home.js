@@ -9,7 +9,7 @@ export default function Home() {
     <div className='home-wrapper'>
       <div className='header'>
         <h2>Your favorite food, delivered while coding</h2>
-        <Link to='/pizza'><button className='action-button'>Pizza?</button></Link>
+        <Link to='/pizza'><button className='action-button' id='pizza-button'>Pizza?</button></Link>
       </div>
     </div>
   );
