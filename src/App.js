@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 import Home from './Home'
 import Pizza from './Pizza'
+import Help from './Help'
+import Confirmation from './Confirmation'
 
 const App = () => {
   return (
@@ -16,6 +18,12 @@ const App = () => {
       <div className='page-container'>
           <Route path='/pizza'>
             <Pizza />
+          </Route>
+          <Route path='/help'>
+            <Help />
+          </Route>
+          <Route path='/confirmation'>
+            <Confirmation />
           </Route>
           <Route exact path='/'>
             <Home />

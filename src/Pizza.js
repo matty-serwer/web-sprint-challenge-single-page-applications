@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { Redirect, useHistory } from 'react-router-dom'
 import * as yup from "yup";
 import schema from "./formSchema";
 import "./App.css";
@@ -20,10 +21,18 @@ const initFormErrors = {
     sauce: "",
 }
 
+
+
 const Pizza = () => {
   const [formValues, setFormValues] = useState(initFormValues);
   const [disabled, setDisabled] = useState(true);
   const [formErrors, setFormErrors] = useState(initFormErrors)
+  let history = useHistory();
+
+  const confirm = () => {
+    
+      history.push('/confirmation')
+  }
 
   const postNewOrder = (newOrder) => {
       axios
@@ -32,6 +41,7 @@ const Pizza = () => {
             setFormValues(initFormValues)
             alert('success!');
             console.log(result);
+            confirm();
         })
   }
 
